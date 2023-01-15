@@ -8,6 +8,8 @@ from keras.applications import vgg16
 model = vgg16.VGG16(weights='imagenet')
 
 def classify_image(img):
+    img = img.resize((224, 224)) # Resize the image
+    img = np.array(img)
     img = np.expand_dims(img, axis=0)
     img = vgg16.preprocess_input(img)
     preds = model.predict(img)
