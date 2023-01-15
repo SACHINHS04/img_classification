@@ -4,16 +4,16 @@ import numpy as np
 from keras.preprocessing import image
 from keras.applications import vgg16
 
-# load the pre-trained model
-model = vgg16.VGG16(weights='imagenet')
-
-@st.cache
 def classify_image(img):
+    # load the pre-trained model
+    model = vgg16.VGG16(weights='imagenet')
     img = img.resize((224, 224)) # Resize the image
     img = np.array(img)
     img = np.expand_dims(img, axis=0)
     img = vgg16.preprocess_input(img)
     preds = model.predict(img)
+    #delete the model after use
+    del model
     return vgg16.decode_predictions(preds, top=3)[0]
 
 def main():
