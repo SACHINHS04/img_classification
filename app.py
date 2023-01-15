@@ -7,6 +7,7 @@ from keras.applications import vgg16
 # load the pre-trained model
 model = vgg16.VGG16(weights='imagenet')
 
+@st.cache
 def classify_image(img):
     img = img.resize((224, 224)) # Resize the image
     img = np.array(img)
@@ -29,8 +30,6 @@ def main():
         predictions = classify_image(image)
         for pred in predictions:
             st.write(f"{pred[1]}: {pred[2]*100:.2f}%")
-        # clear the cache after the classification is done
-        st.cache.clear()
 
 if __name__ == '__main__':
     main()
