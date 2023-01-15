@@ -14,7 +14,7 @@ def classify_image(img):
     return vgg16.decode_predictions(preds, top=3)[0]
 
 def main():
-    st.set_title('Image Classification App')
+    st.header("Image Classification App")
     st.text("Upload an image and the model will predict what's in it.")
 
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
@@ -29,4 +29,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
