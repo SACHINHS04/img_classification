@@ -22,12 +22,15 @@ def main():
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
+        # convert the uploaded file to a PIL image
         image = Image.open(uploaded_file)
         st.image(image, caption='Uploaded Image.', use_column_width=True)
         st.write("Classifying...")
         predictions = classify_image(image)
         for pred in predictions:
             st.write(f"{pred[1]}: {pred[2]*100:.2f}%")
+        # clear the cache after the classification is done
+        st.cache.clear()
 
 if __name__ == '__main__':
     main()
